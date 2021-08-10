@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Ninja Gold</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body> 
+
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <h1 class="py-5 text-light text-center">Ninja Gold</h1>
+            <h2 class=" text-center text-white">Gold {{ request.session.gold }}</h2>
+            <div class="row">
+                <div class="col-3 px-1">
+                    <div class="card" style="width: 17rem;">
+                        <img src="https://art.pixilart.com/27096d9ab2461f9.png" class="card-img-top" alt="farm">
+                        <div class="card-body">
+                            <h5 class="card-title">Farm</h5>
+                            <p class="card-text">Try!!</p>
+                            <a href="/process_money/farm" class="btn btn-primary">Find Gold</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 px-1">
+                    <div class="card" style="width: 17rem;">
+                        <img src="https://andwhyisit.bugsiteguardian.com/cstsf/archive1/p139146-0-vkxej.jpg"  class="card-img-top" alt="cave">
+                        <div class="card-body">
+                            <h5 class="card-title">Cave</h5>
+                            <p class="card-text">Try!!</p>
+                            <a href="/process_money/cave" class="btn btn-primary">Find Gold</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 px-1">
+                    <div class="card" style="width: 17rem;">
+                        <img src="https://pbs.twimg.com/media/DxwEm_LUcAAtDhu?format=jpg&name=small" class="card-img-top" alt="house">
+                        <div class="card-body">
+                            <h5 class="card-title">House</h5>
+                            <p class="card-text">Try!!</p>
+                            <a href="/process_money/house" class="btn btn-primary">Find Gold</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 px-1">
+                    <div class="card" style="width: 17rem;">
+                        <img  src="https://almighty.c64.org/8-bit-online-slot-gaming.jpg" class="card-img-top" alt="casino">
+                        <div class="card-body">
+                            <h5 class="card-title">Casino</h5>
+                            <p class="card-text">Try!!</p>
+                            <a href="/process_money/casino" class="btn btn-primary">Find Gold</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="footer my-3" id ="activities">
+                    <h3 class=" text-light">Actividades</h3>
+                    {% for activity in request.session.activities %}
+                        <span class="{% if activity.golds >= 0 %}text-primary{% else %}text-danger{% endif %}">{{ activity.text }}</span> <br>
+                    {% endfor %}
+                </div>
+            </div>
+           
+        </div>
+    </form>
+    <div class="row text-center">
+        <div class="col-12">
+            <button onclick="window.location.href='/reset';" class="btn btn-danger m-2">
+                Reset
+            </button>
+        </div>
+    </div>
+    <script>
+        const activities = document.getElementById('activities')
+        activities.scrollTo(0, activities.scrollHeight)
+    </script> 
+</body>
+</html>
